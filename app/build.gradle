@@ -29,6 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+    namespace 'ru.kpfu.itis.hw_android_2022'
 }
 
 dependencies {
