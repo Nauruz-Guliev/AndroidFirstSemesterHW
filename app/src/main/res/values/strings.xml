@@ -1,4 +1,42 @@
 <resources>
     <string name="app_name">hw_android_2022</string>
     <string name="scan_qr_code">Scan qr code</string>
+    <string name="open_bottom_sheet">Open bottom sheet</string>
+    <string name="request_key">REQUEST_KEY</string>
+    <string name="sort_by_name">Sort by name</string>
+    <string name="sort_by_id">Sort by id</string>
+    <string name="id">ID</string>
+    <string name="name">NAME</string>
+    <string name="sort_by">Sort by:</string>
+
+    <string name="cities">Cities</string>
+    <string name="camera">Camera</string>
+
+    <string name="name_asc">NAME_ASC</string>
+    <string name="name_desc">NAME_DESC</string>
+    <string name="id_desc">ID_DESC</string>
+    <string name="id_asc">ID_ASC</string>
+    <string name="apply">Apply</string>
+    <string name="id_asc_space">ID ASC</string>
+    <string name="id_desc_space">Id desc</string>
+    <string name="name_asc_space">Name asc</string>
+    <string name="name_desc_space">Name desc</string>
+
+    <string name="permission_required">Camera access is required to scan QR-code.</string>
+    <string name="ok">OK</string>
+    <string name="permission_granted">Permission is granted. You can use the QR-code scanner now.</string>
+
+    <string name="permission_required_title">%1s permission is denied.</string>
+    <string name="permission_required_message">This permission is required in order to use %1s. You can grant the permission in settings.</string>
+    <string name="action_message">Go to settings</string>
+
+    <string name="scan_prompt_title">Scan QR-code</string>
+
+    <string name="url_alert_title">Choose an option</string>
+    <string name="url_alert_message">Where would you like to open the link?</string>
+    <string name="url_alert_positive_choice">Browser</string>
+    <string name="url_alert_negative_choice">WebView</string>
+
+
+
 </resources>

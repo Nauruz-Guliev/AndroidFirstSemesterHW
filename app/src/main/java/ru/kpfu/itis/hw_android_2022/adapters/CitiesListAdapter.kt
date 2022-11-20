@@ -2,8 +2,7 @@ package ru.kpfu.itis.hw_android_2022.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import ru.kpfu.itis.hw_android_2022.CitiesViewHolder
-import ru.kpfu.itis.hw_android_2022.dao.model.City
+import ru.kpfu.itis.hw_android_2022.models.City
 
 class CitiesListAdapter : androidx.recyclerview.widget.ListAdapter<City, CitiesViewHolder>(
     object : DiffUtil.ItemCallback<City>() {

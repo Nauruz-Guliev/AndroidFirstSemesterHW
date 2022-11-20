@@ -1,10 +1,12 @@
 package ru.kpfu.itis.hw_android_2022.dao
 
-import ru.kpfu.itis.hw_android_2022.dao.model.City
+import android.util.Log
+import ru.kpfu.itis.hw_android_2022.models.City
+import ru.kpfu.itis.hw_android_2022.models.SortModel
 
 object CitiesRepository {
 
-    val cities = mutableListOf(
+    private val items = mutableListOf(
         City(1, "Edinburgh"),
         City(2, "Chicago"),
         City(3, "Medellin"),
@@ -20,6 +22,24 @@ object CitiesRepository {
         City(13, "Manchester"),
         City(14, "Mumbai"),
         City(15, "Melbourne")
-
     )
+    private var selectedSort: SortModel? = SortModel.ID_ASC
+
+
+    fun getSortedList(): List<City> {
+        return when (selectedSort) {
+            SortModel.ID_ASC -> items.sortedBy { it.id }
+            SortModel.ID_DESC -> items.sortedByDescending { it.id }
+            SortModel.NAME_ASC -> items.sortedBy { it.name }
+            SortModel.NAME_DESC -> items.sortedByDescending { it.name }
+            else -> {items.sortedBy { it.id }}
+        }
+    }
+
+    fun setSelectedSort(sort: SortModel?) {
+        selectedSort = sort?: selectedSort
+    }
+
+    fun getSelectedSort(): SortModel? = selectedSort
+
 }

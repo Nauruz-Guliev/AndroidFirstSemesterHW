@@ -1,14 +1,15 @@
 package ru.kpfu.itis.hw_android_2022
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import ru.kpfu.itis.hw_android_2022.adapters.ViewPagerAdapter
 import ru.kpfu.itis.hw_android_2022.databinding.ActivityMainBinding
+import ru.kpfu.itis.hw_android_2022.fragments.CameraFragment
+import ru.kpfu.itis.hw_android_2022.fragments.CitiesFragment
+import ru.kpfu.itis.hw_android_2022.util.PermissionsRequestHandler
+import ru.kpfu.itis.hw_android_2022.util.showToast
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,11 +17,11 @@ class MainActivity : AppCompatActivity() {
     private var viewPagerAdapter: ViewPagerAdapter? = null
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initViewPager()
         initTabLayout()
     }
@@ -30,8 +31,8 @@ class MainActivity : AppCompatActivity() {
             TabLayoutMediator(tabLayout, viewPager) {
                     tab, position ->
                 when(position) {
-                    0-> tab.text = "Cities"
-                    1-> tab.text = "Camera"
+                    0-> tab.text = getString(R.string.cities)
+                    1-> tab.text = getString(R.string.camera)
                 }
             }.attach()
         }
@@ -39,10 +40,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewPager() {
         val commonBundle = Bundle()
-        val fragmentsList = listOf<Fragment>(
+        val fragmentsList = listOf(
             CitiesFragment.createInstance(commonBundle),
             CameraFragment.createInstance(commonBundle),
-            )
+        )
         viewPagerAdapter = ViewPagerAdapter(
             activity = this,
             fragments = fragmentsList

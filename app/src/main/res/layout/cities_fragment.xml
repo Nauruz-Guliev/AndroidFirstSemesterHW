@@ -9,10 +9,21 @@
         android:id="@+id/rv_cities"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:itemCount="15"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/city_item"
+        app:layout_constraintBottom_toTopOf="@+id/btn_bottom_sheet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="15"
+        tools:listitem="@layout/city_item" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_bottom_sheet"
+        android:layout_width="0dp"
+        android:layout_margin="8dp"
+        android:text="@string/open_bottom_sheet"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
