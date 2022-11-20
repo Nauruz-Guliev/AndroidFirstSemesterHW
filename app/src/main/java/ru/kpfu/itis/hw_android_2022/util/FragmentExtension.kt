@@ -33,22 +33,21 @@ fun View.showSnackbar(
 }
 
 
-// с помощью дженериков ограничил только до тех, кто реализует Parcelable,
-// но при этом не знаю, как передать название класса, как параметр для каста??
+/* с помощью дженериков получаю из бандла любой объект по ключу, который реализует интерфейс Parcelable
+при этом используются разные методы для обратной совместимости
+ */
 fun <T : Parcelable> Fragment.getParcelable(
     arguments: Bundle?,
     ARGUMENT_KEY: String,
     className: Class<T>
-): Parcelable? {
-    return if (VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        arguments?.getParcelable(ARGUMENT_KEY, className)
-    } else {
-        //интересно, а как здесь сразу можно скастить к нужному классу? пример:
-        // arguments?.getParcelable(ARGUMENT_KEY) as className
-        arguments?.getParcelable(ARGUMENT_KEY)
-    }
-}
+): T? = if (VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+    arguments?.getParcelable(ARGUMENT_KEY, className)
+else arguments?.getParcelable(ARGUMENT_KEY) as T?
 
+
+/*удобно хранить сообщение и действие в виде пары
+так как не всегда необходимы обе кнопки, одна из пар нулабельна
+ */
 fun Fragment.showAlert(
     title: String,
     message: String,

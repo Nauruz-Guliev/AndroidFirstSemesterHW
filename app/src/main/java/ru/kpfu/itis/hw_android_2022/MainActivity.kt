@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
+import com.journeyapps.barcodescanner.CaptureActivity
 import ru.kpfu.itis.hw_android_2022.adapters.ViewPagerAdapter
 import ru.kpfu.itis.hw_android_2022.databinding.ActivityMainBinding
 import ru.kpfu.itis.hw_android_2022.fragments.CameraFragment
@@ -15,8 +16,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +49,5 @@ class MainActivity : AppCompatActivity() {
         )
         binding.viewPager.adapter = viewPagerAdapter
     }
-
 
 }

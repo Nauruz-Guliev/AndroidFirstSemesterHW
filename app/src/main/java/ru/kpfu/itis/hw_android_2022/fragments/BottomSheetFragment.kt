@@ -17,6 +17,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     private var _binding: BottomSheetFragmentBinding? = null
     private val binding by lazy { _binding!! }
 
+    //хотелось немного закруглить верхние края
     override fun getTheme() = R.style.AppBottomSheetDialogTheme
 
     private var currentSort: SortModel? = null
@@ -31,18 +32,23 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = BottomSheetFragmentBinding.inflate(layoutInflater)
-        currentSort = getParcelable(arguments, ARGUMENT_KEY, SortModel::class.java) as SortModel?
+        currentSort = getParcelable(arguments, ARGUMENT_KEY, SortModel::class.java)
         return binding.root
     }
 
     private fun checkButton(@IdRes buttonId: Int) {
         binding.toggleGroup.check(buttonId)
+        //можно было и из биндинга достать, наверное, но зачем
+        //метод же вызывается после того, как все вьюшки инициализированы
+        //потому кнопка обязательно найдется
         buttonChecked = activity?.findViewById(buttonId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
+        //чекнутой должна быть кнопка, которая соответсвует текущей сортировке
+        //текущую получаем из бандла
         when (currentSort) {
             SortModel.ID_ASC -> checkButton(R.id.btn_id_asc)
             SortModel.ID_DESC -> checkButton(R.id.btn_id_desc)
@@ -66,7 +72,12 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 }
             }
             btnApply.setOnClickListener {
+                //если сами ничего не выбрали, то пусть выбранной будет текущая
+                //чтобы не слетал выбор после закрытия(нажатие по пустому месту)
                 selectedSort = selectedSort ?: currentSort
+
+                //фрагмент менеджер bottomSheet будет родительским по отношению к основному,
+                //в котором основным является childFragmentManager
                 parentFragmentManager.setFragmentResult(
                     REQUEST_KEY,
                     bundleOf(RESULT_EXTRA_KEY to selectedSort)

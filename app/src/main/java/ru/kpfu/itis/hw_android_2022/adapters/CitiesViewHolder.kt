@@ -11,7 +11,6 @@ class CitiesViewHolder(val binding: CityItemBinding) : ViewHolder(binding.root) 
     fun onBind(item: City) {
         binding.city = item
     }
-
     companion object {
         fun create(parent: ViewGroup) =
             CitiesViewHolder(

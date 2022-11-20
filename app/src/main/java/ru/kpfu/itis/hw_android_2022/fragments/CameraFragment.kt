@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
+import ru.kpfu.itis.hw_android_2022.CaptionActivity
 import ru.kpfu.itis.hw_android_2022.R
 import ru.kpfu.itis.hw_android_2022.databinding.CameraFragmentBinding
 import ru.kpfu.itis.hw_android_2022.util.PermissionsRequestHandler
@@ -76,6 +77,7 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
     }
 
     private fun onClickRequestPermission(view: View) {
+        //если разрешение есть
         if (ContextCompat.checkSelfPermission(
                 binding.root.context,
                 CAMERA
@@ -83,6 +85,7 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
         ) {
             barcodeLauncher.launch(scanOptions)
         } else {
+            // если запретили один раз
             if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), CAMERA)) {
                 view.showSnackbar(
                     view,
@@ -92,6 +95,7 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
                 ) {
                     permissionsRequestHandler.requestSinglePermission(CAMERA)
                 }
+                //после 2-ух запретов
             } else {
                 showOpenSettingsAlert()
             }
@@ -116,8 +120,11 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
         scanOptions = ScanOptions()
             .setCameraId(0)
             .setBeepEnabled(false)
+            .setOrientationLocked(true)
             .setPrompt(getString(R.string.scan_prompt_title))
             .setBarcodeImageEnabled(true)
+            .setCaptureActivity(CaptionActivity::class.java)
+
     }
 
     private fun openUrlInBrowser() {

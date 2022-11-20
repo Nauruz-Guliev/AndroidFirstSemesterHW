@@ -38,27 +38,24 @@ class CitiesFragment : Fragment(R.layout.cities_fragment) {
     }
 
     private fun initFragmentResultListener() {
-        parentFragmentManager.setFragmentResultListener(
+        childFragmentManager.setFragmentResultListener(
             BottomSheetFragment.REQUEST_KEY,
             viewLifecycleOwner
         ) { _, bundle ->
-            selectedSort = getParcelable(
-                bundle,
-                BottomSheetFragment.RESULT_EXTRA_KEY,
-                SortModel::class.java
-            ) as SortModel?
-            CitiesRepository.setSelectedSort(
-                selectedSort
-            )
-            adapter?.submitList(CitiesRepository.getSortedList())
+            selectedSort =
+                getParcelable(bundle, BottomSheetFragment.RESULT_EXTRA_KEY, SortModel::class.java)
+            CitiesRepository.setSelectedSort(selectedSort)
+            adapter?.submitList(CitiesRepository.cities)
         }
     }
 
 
     private fun initButtonListener() {
         binding.btnBottomSheet.setOnClickListener {
+            //создаём bottomsheet и передаём текущую сортировку из репозитория
+            //чтобы выбранной кнопкой была та, которая соответсвует сортировке
             BottomSheetFragment.createInstance(CitiesRepository.getSelectedSort()).show(
-                parentFragmentManager,
+                childFragmentManager,
                 BottomSheetFragment.TAG
             )
         }
@@ -66,7 +63,7 @@ class CitiesFragment : Fragment(R.layout.cities_fragment) {
 
     private fun initRecyclerView() {
         adapter = CitiesListAdapter()
-        adapter?.submitList(CitiesRepository.getSortedList())
+        adapter?.submitList(CitiesRepository.cities)
         binding.rvCities.adapter = adapter
     }
 
