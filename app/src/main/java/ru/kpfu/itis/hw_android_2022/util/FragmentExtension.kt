@@ -1,6 +1,5 @@
 package ru.kpfu.itis.hw_android_2022.util
 
-import android.content.Context
 import android.os.Build
 import android.os.Build.VERSION
 import android.os.Bundle
@@ -11,18 +10,17 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
-fun Fragment.showToast(context: Context?, message: String) {
-    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-}
+//иногда нагляднее так дебажить, чтобы быстрее было писать сделал расширение
+fun <T> Fragment.showToast(message: T) =
+    Toast.makeText(this.context, message.toString(), Toast.LENGTH_SHORT).show()
 
 fun View.showSnackbar(
-    view: View,
     msg: String,
     length: Int,
     actionMessage: CharSequence?,
     action: (View) -> Unit
 ) {
-    val snackbar = Snackbar.make(view, msg, length)
+    val snackbar = Snackbar.make(this, msg, length)
     if (actionMessage != null) {
         snackbar.setAction(actionMessage) {
             action(this)

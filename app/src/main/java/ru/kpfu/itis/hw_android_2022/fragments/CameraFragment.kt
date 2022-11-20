@@ -21,10 +21,7 @@ import com.journeyapps.barcodescanner.ScanOptions
 import ru.kpfu.itis.hw_android_2022.CaptionActivity
 import ru.kpfu.itis.hw_android_2022.R
 import ru.kpfu.itis.hw_android_2022.databinding.CameraFragmentBinding
-import ru.kpfu.itis.hw_android_2022.util.PermissionsRequestHandler
-import ru.kpfu.itis.hw_android_2022.util.checkUrl
-import ru.kpfu.itis.hw_android_2022.util.showAlert
-import ru.kpfu.itis.hw_android_2022.util.showSnackbar
+import ru.kpfu.itis.hw_android_2022.util.*
 
 
 class CameraFragment : Fragment(R.layout.camera_fragment) {
@@ -36,9 +33,9 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
     private val permissionsRequestHandler =
         PermissionsRequestHandler(fragment = this) { isGranted ->
             if (isGranted) barcodeLauncher.launch(scanOptions)
-            else onClickRequestPermission(binding.root)
+            else onClickRequestPermission()
         }
-
+    //можно было вынести в свой класс, наверное
     private val barcodeLauncher =
         registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
             if (result.contents != null) {
@@ -76,7 +73,7 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
         }
     }
 
-    private fun onClickRequestPermission(view: View) {
+    private fun onClickRequestPermission() {
         //если разрешение есть
         if (ContextCompat.checkSelfPermission(
                 binding.root.context,
@@ -87,8 +84,7 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
         } else {
             // если запретили один раз
             if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), CAMERA)) {
-                view.showSnackbar(
-                    view,
+                view?.showSnackbar(
                     getString(R.string.permission_required),
                     Snackbar.LENGTH_SHORT,
                     getString(R.string.ok)
@@ -97,23 +93,22 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
                 }
                 //после 2-ух запретов
             } else {
-                showOpenSettingsAlert()
+                showAlert(
+                    title = getString(R.string.permission_required_title, getString(R.string.camera)),
+                    message = getString(R.string.permission_required_message, getString(R.string.camera)),
+                    positiveAction = getString(R.string.action_message) to ::openSettings,
+                    negativeAction = null
+                )
             }
         }
     }
 
-
-    private fun showOpenSettingsAlert() {
+    private fun openSettings(){
         val settingsIntent = Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
             Uri.fromParts("package", requireContext().packageName, null)
         )
-        showAlert(
-            title = getString(R.string.permission_required_title, getString(R.string.camera)),
-            message = getString(R.string.permission_required_message, getString(R.string.camera)),
-            positiveAction = getString(R.string.action_message) to { startActivity(settingsIntent) },
-            negativeAction = null
-        )
+        startActivity(settingsIntent)
     }
 
     private fun initScanOptions() {
@@ -133,6 +128,7 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
     }
 
     //интересно, а как же обрабатывать xss уязвимости на уровне андроида??
+    //я всё-таки хочу жаваскрипт в у себя в webview
     private fun openUrlInWebView() {
         binding.webView.apply {
             settings.javaScriptEnabled = true
@@ -148,8 +144,8 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
+    override fun onDestroy() {
+        super.onDestroy()
         _binding = null
     }
 }

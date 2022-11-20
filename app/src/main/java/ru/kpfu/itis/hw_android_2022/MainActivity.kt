@@ -1,16 +1,12 @@
 package ru.kpfu.itis.hw_android_2022
 
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
-import com.journeyapps.barcodescanner.CaptureActivity
 import ru.kpfu.itis.hw_android_2022.adapters.ViewPagerAdapter
 import ru.kpfu.itis.hw_android_2022.databinding.ActivityMainBinding
 import ru.kpfu.itis.hw_android_2022.fragments.CameraFragment
 import ru.kpfu.itis.hw_android_2022.fragments.CitiesFragment
-import ru.kpfu.itis.hw_android_2022.util.PermissionsRequestHandler
-import ru.kpfu.itis.hw_android_2022.util.showToast
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
