@@ -7,6 +7,7 @@ import ru.kpfu.itis.hw_android_2022.adapters.ViewPagerAdapter
 import ru.kpfu.itis.hw_android_2022.databinding.ActivityMainBinding
 import ru.kpfu.itis.hw_android_2022.fragments.CameraFragment
 import ru.kpfu.itis.hw_android_2022.fragments.CitiesFragment
+import ru.kpfu.itis.hw_android_2022.fragments.PhotoFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
                 when(position) {
                     0-> tab.text = getString(R.string.cities)
                     1-> tab.text = getString(R.string.camera)
+                    2-> tab.text = getString(R.string.photo)
                 }
             }.attach()
         }
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         val fragmentsList = listOf(
             CitiesFragment.createInstance(commonBundle),
             CameraFragment.createInstance(commonBundle),
+            PhotoFragment.createInstance(commonBundle)
         )
         viewPagerAdapter = ViewPagerAdapter(
             activity = this,

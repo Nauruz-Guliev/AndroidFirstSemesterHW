@@ -13,12 +13,14 @@ import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.snackbar.Snackbar
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
-import ru.kpfu.itis.hw_android_2022.CaptionActivity
+import ru.kpfu.itis.hw_android_2022.CaptureActivity
 import ru.kpfu.itis.hw_android_2022.R
 import ru.kpfu.itis.hw_android_2022.databinding.CameraFragmentBinding
 import ru.kpfu.itis.hw_android_2022.util.*
@@ -32,22 +34,33 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
 
     private val permissionsRequestHandler =
         PermissionsRequestHandler(fragment = this) { isGranted ->
-            if (isGranted) barcodeLauncher.launch(scanOptions)
+            if (isGranted) customLauncher.launch(scanOptions)
             else onClickRequestPermission()
         }
-    //можно было вынести в свой класс, наверное
-    private val barcodeLauncher =
-        registerForActivityResult(ScanContract()) { result: ScanIntentResult ->
-            if (result.contents != null) {
-                qrCodeUrl = result.contents
-                showAlert(
-                    title = getString(R.string.url_alert_title),
-                    message = getString(R.string.url_alert_message),
-                    positiveAction = getString(R.string.url_alert_positive_choice) to ::openUrlInBrowser,
-                    negativeAction = getString(R.string.url_alert_negative_choice) to ::openUrlInWebView
-                )
+
+
+    private val customLauncher = registerForActivityResult(CustomContract()) {
+        if (it?.first?.contents != null) {
+            showToast(it.first)
+            qrCodeUrl = it.first.contents
+            showAlert(
+                title = getString(R.string.url_alert_title),
+                message = getString(R.string.url_alert_message),
+                positiveAction = getString(R.string.url_alert_positive_choice) to ::openUrlInBrowser,
+                negativeAction = getString(R.string.url_alert_negative_choice) to ::openUrlInWebView
+            )
+        } else if (it?.second != null) {
+            val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
+            parentFragmentManager.setFragmentResult(
+                PHOTO_REQUEST_KEY,
+                bundleOf(PHOTO_RESULT_KEY to it.second)
+            )
+            viewPager?.post {
+                viewPager.currentItem = 2
             }
         }
+    }
+
     private var scanOptions: ScanOptions? = null
 
     override fun onCreateView(
@@ -80,7 +93,10 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
                 CAMERA
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            barcodeLauncher.launch(scanOptions)
+            //barcodeLauncher.launch(scanOptions)
+            customLauncher.launch(
+                scanOptions
+            )
         } else {
             // если запретили один раз
             if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), CAMERA)) {
@@ -118,7 +134,7 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
             .setOrientationLocked(true)
             .setPrompt(getString(R.string.scan_prompt_title))
             .setBarcodeImageEnabled(true)
-            .setCaptureActivity(CaptionActivity::class.java)
+            .setCaptureActivity(CaptureActivity::class.java)
 
     }
 
@@ -139,6 +155,8 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
 
     companion object {
         const val TAG = "CAMERA_FRAGMENT"
+        const val PHOTO_REQUEST_KEY = "PHOTO_REQUEST_KEY"
+        const val PHOTO_RESULT_KEY = "PHOTO_RESULT_KEY"
         fun createInstance(arguments: Bundle?) = CameraFragment().apply {
             this.arguments = arguments
         }

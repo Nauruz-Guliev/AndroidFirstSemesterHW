@@ -36,6 +36,10 @@
     <string name="url_alert_message">Where would you like to open the link?</string>
     <string name="url_alert_positive_choice">Browser</string>
     <string name="url_alert_negative_choice">WebView</string>
+    <string name="photo_from_camera">Photo from camera</string>
+
+    <string name="photo">Photo</string>
+    <string name="open_camera">Open camera</string>
 
 
 </resources>
