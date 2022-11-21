@@ -42,7 +42,6 @@ class CitiesFragment : Fragment(R.layout.cities_fragment) {
 
 
     private fun initButtonListener() {
-        showToast("asdasdasd")
         binding.btnBottomSheet.setOnClickListener {
             //создаём bottomsheet и передаём текущую сортировку из репозитория
             //чтобы выбранной кнопкой была та, которая соответсвует сортировке
