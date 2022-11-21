@@ -13,7 +13,7 @@ import ru.kpfu.itis.hw_android_2022.databinding.BottomSheetFragmentBinding
 import ru.kpfu.itis.hw_android_2022.models.SortModel
 import ru.kpfu.itis.hw_android_2022.util.getParcelable
 
-class BottomSheetFragment : BottomSheetDialogFragment() {
+class BottomSheetFragment : BottomSheetDialogFragment(R.layout.bottom_sheet_fragment) {
     private var _binding: BottomSheetFragmentBinding? = null
     private val binding by lazy { _binding!! }
 
@@ -26,14 +26,9 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private var selectedSort: SortModel? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = BottomSheetFragmentBinding.inflate(layoutInflater)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         currentSort = getParcelable(arguments, ARGUMENT_KEY, SortModel::class.java)
-        return binding.root
     }
 
     private fun checkButton(@IdRes buttonId: Int) {
@@ -46,6 +41,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = BottomSheetFragmentBinding.bind(view)
         initListeners()
         //чекнутой должна быть кнопка, которая соответсвует текущей сортировке
         //текущую получаем из бандла

@@ -38,7 +38,7 @@ fun <T : Parcelable> Fragment.getParcelable(
     arguments: Bundle?,
     ARGUMENT_KEY: String,
     className: Class<T>
-): T? = if (VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+) = if (VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
     arguments?.getParcelable(ARGUMENT_KEY, className)
 else arguments?.getParcelable(ARGUMENT_KEY) as T?
 
@@ -51,13 +51,12 @@ fun Fragment.showAlert(
     message: String,
     positiveAction: Pair<String, (() -> Unit)?>,
     negativeAction: Pair<String, (() -> Unit)?>?
-) {
-    AlertDialog.Builder(this.requireContext())
-        .setTitle(title)
-        .setMessage(message)
-        .setPositiveButton(positiveAction.first) { _, _ -> positiveAction.second?.invoke() }
-        .setNegativeButton(negativeAction?.first) { _, _ -> negativeAction?.second?.invoke() }
-        .create()
-        .show()
-}
+) = AlertDialog.Builder(this.requireContext())
+    .setTitle(title)
+    .setMessage(message)
+    .setPositiveButton(positiveAction.first) { _, _ -> positiveAction.second?.invoke() }
+    .setNegativeButton(negativeAction?.first) { _, _ -> negativeAction?.second?.invoke() }
+    .create()
+    .show()
+
 

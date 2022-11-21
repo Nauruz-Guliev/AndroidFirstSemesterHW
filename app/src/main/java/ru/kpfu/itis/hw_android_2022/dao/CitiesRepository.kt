@@ -37,6 +37,6 @@ object CitiesRepository {
         selectedSort = sort?: selectedSort
     }
 
-    fun getSelectedSort(): SortModel? = selectedSort
+    fun getSelectedSort() = selectedSort
 
 }

@@ -1,9 +1,7 @@
 package ru.kpfu.itis.hw_android_2022.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.kpfu.itis.hw_android_2022.R
 import ru.kpfu.itis.hw_android_2022.adapters.CitiesListAdapter
@@ -11,6 +9,7 @@ import ru.kpfu.itis.hw_android_2022.dao.CitiesRepository
 import ru.kpfu.itis.hw_android_2022.databinding.CitiesFragmentBinding
 import ru.kpfu.itis.hw_android_2022.models.SortModel
 import ru.kpfu.itis.hw_android_2022.util.getParcelable
+import ru.kpfu.itis.hw_android_2022.util.showToast
 
 class CitiesFragment : Fragment(R.layout.cities_fragment) {
 
@@ -21,17 +20,9 @@ class CitiesFragment : Fragment(R.layout.cities_fragment) {
 
     private var selectedSort: SortModel? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = CitiesFragmentBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = CitiesFragmentBinding.bind(view)
         initRecyclerView()
         initButtonListener()
         initFragmentResultListener()
@@ -51,6 +42,7 @@ class CitiesFragment : Fragment(R.layout.cities_fragment) {
 
 
     private fun initButtonListener() {
+        showToast("asdasdasd")
         binding.btnBottomSheet.setOnClickListener {
             //создаём bottomsheet и передаём текущую сортировку из репозитория
             //чтобы выбранной кнопкой была та, которая соответсвует сортировке

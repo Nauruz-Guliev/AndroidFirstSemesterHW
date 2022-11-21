@@ -24,16 +24,15 @@ class CustomContract :
         return chooserIntent
     }
 
-    override fun parseResult(resultCode: Int, intent: Intent?): Pair<ScanIntentResult, Bitmap?>? {
+    override fun parseResult(resultCode: Int, intent: Intent?): Pair<ScanIntentResult, Bitmap?>? =
         if (resultCode == Activity.RESULT_OK) {
-            val scanResult = ScanIntentResult.parseActivityResult(resultCode, intent)
-            val bitmap = if (VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ScanIntentResult.parseActivityResult(
+                resultCode,
+                intent
+            ) to if (VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent?.getParcelableExtra("data", Bitmap::class.java)
             } else {
-                intent?.getParcelableExtra("data")
+                intent?.getParcelableExtra("data") as Bitmap?
             }
-            return scanResult to bitmap
-        }
-        return null
-    }
+        } else null
 }
