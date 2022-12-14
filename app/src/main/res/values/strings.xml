@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">hw_android_2022</string>
+    <string name="firstfragment">FirstFragment</string>
+    <string name="secondfragment">SecondFragment</string>
+    <string name="image">image</string>
+    <string name="preload_images">Preload images</string>
 </resources>
