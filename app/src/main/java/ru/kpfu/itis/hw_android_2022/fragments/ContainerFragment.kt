@@ -92,6 +92,11 @@ class ContainerFragment : Fragment() {
         binding.viewpager.adapter = viewPagerAdapter
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     companion object {
         private const val CHUNK_SIZE = 3;
     }

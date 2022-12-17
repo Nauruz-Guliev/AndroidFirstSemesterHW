@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.kpfu.itis.hw_android_2022.databinding.ImageFragmentBinding
 import ru.kpfu.itis.hw_android_2022.load
 import ru.kpfu.itis.hw_android_2022.preloadImage
@@ -60,6 +63,11 @@ class ImageFragment : Fragment() {
                 progressBar = progressbar
             )
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {
