@@ -1,14 +1,11 @@
 package ru.kpfu.itis.hw_android_2022
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
 import ru.kpfu.itis.hw_android_2022.databinding.ActivityMainBinding
+import ru.kpfu.itis.hw_android_2022.fragments.ContainerFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,26 +13,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setUpNavigation()
-
+        navigateToMainFragment()
     }
 
-    override fun onSupportNavigateUp() = findNavController(R.id.fragment_container).navigateUp()
-
-    private fun setUpNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
-        val navController: NavController = navHostFragment.navController
-        val appBarConfiguration = AppBarConfiguration(
-            topLevelDestinationIds = setOf(R.id.firstFragment, R.id.secondFragment),
-            fallbackOnNavigateUpListener = ::onSupportNavigateUp
-        )
-        binding.bottomNav.setupWithNavController(navController)
-        setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(
-            navController = navController,
-            configuration = appBarConfiguration
-        )
+    private fun navigateToMainFragment() {
+        supportFragmentManager.commit {
+            add<ContainerFragment>(R.id.fragment_container)
+            setReorderingAllowed(true)
+            addToBackStack(null)
+        }
     }
 }

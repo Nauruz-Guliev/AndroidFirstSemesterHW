@@ -1,28 +1,13 @@
-package com.example.androidclass.viewpager
+package ru.kpfu.itis.hw_android_2022.viewpager
 
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-internal class ViewPagerAdapter : RecyclerView.Adapter<PagerViewHolder>() {
-    var onWork: ((String, ImageView, ProgressBar) -> Unit)? = null
-
-    var imageUrl = arrayOf(
-        "https://www.nasa.gov/sites/default/files/thumbnails/image/uranus.jpg",
-        "https://www.nasa.gov/sites/default/files/images/729223main_728322main_messenger_orbit_image20130218_2_full_full_full.jpg",
-        "https://www.nasa.gov/sites/default/files/thumbnails/image/imagesvenus20191211venus20191211-16.jpeg",
-        "https://www.nasa.gov/sites/default/files/thumbnails/image/stsci-h-p1936a-m-1999x2000.png"
-    )
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder =
-        PagerViewHolder.create(parent, onWork)
-
-    override fun getItemCount(): Int = imageUrl.size
-
-    override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
-        holder.bind(imageUrl[position])
-    }
+class ViewPagerAdapter(
+    activity: FragmentActivity,
+    private val fragments: List<Fragment>
+) : FragmentStateAdapter(activity) {
+    override fun getItemCount() = fragments.size
+    override fun createFragment(position: Int) = fragments[position]
 }
-
-

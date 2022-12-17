@@ -4,4 +4,27 @@
     <string name="secondfragment">SecondFragment</string>
     <string name="image">image</string>
     <string name="preload_images">Preload images</string>
+
+
+    <string name="link1">https://thumbs.dreamstime.com/b/little-cats-20284533.jpg</string>
+    <string name="link2">https://t3.ftcdn.net/jpg/02/95/94/94/360_F_295949484_8BrlWkTrPXTYzgMn3UebDl1O13PcVNMU.jpg</string>
+    <string name="link3">https://cdn.theatlantic.com/thumbor/W544GIT4l3z8SG-FMUoaKpFLaxE=/0x131:2555x1568/1600x900/media/img/mt/2017/06/shutterstock_319985324/original.jpg</string>
+    <string name="link4">https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/rockcms/2022-07/220726-cat-theo-elise-ew-636p-6cd3b0.jpg</string>
+    <string name="link5">https://image.petmd.com/files/styles/863x625/public/orange-tabby-kitten-walking-across-floor.jpg</string>
+    <string name="link6">https://image.petmd.com/files/styles/863x625/public/petmd-aggression-cats.jpg</string>
+
+
+    <string name="preload_all_images">Preload all images</string>
+
+    <string name="success">All images will be downloaded</string>
+    <string name="error">Unable to download</string>
+
+    <string-array name="cats_array">
+        <item>@string/link1</item>
+        <item>@string/link2</item>
+        <item>@string/link3</item>
+        <item>@string/link4</item>
+        <item>@string/link5</item>
+        <item>@string/link6</item>
+    </string-array>
 </resources>
