@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">hw_android_2022</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="confirm_password">Confirm password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings">Settings</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="edit_login">Edit login</string>
+    <string name="i_have_an_account">I have an account</string>
+    <string name="register_new_account">Register new account</string>
 </resources>
