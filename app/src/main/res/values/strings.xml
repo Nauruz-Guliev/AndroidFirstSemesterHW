@@ -41,5 +41,7 @@
     <string name="photo">Photo</string>
     <string name="open_camera">Open camera</string>
 
+    <string name="invalid_url">Invalid QR-code. It is not a URL. </string>
+
 
 </resources>

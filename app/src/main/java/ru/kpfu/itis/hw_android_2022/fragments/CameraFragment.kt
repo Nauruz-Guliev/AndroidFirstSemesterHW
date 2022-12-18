@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.webkit.URLUtil
 import android.webkit.WebViewClient
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -37,14 +38,17 @@ class CameraFragment : Fragment(R.layout.camera_fragment) {
 
     private val customLauncher = registerForActivityResult(CustomContract()) {
         if (it?.first?.contents != null) {
-            showToast(it.first)
             qrCodeUrl = it.first.contents
-            showAlert(
-                title = getString(R.string.url_alert_title),
-                message = getString(R.string.url_alert_message),
-                positiveAction = getString(R.string.url_alert_positive_choice) to ::openUrlInBrowser,
-                negativeAction = getString(R.string.url_alert_negative_choice) to ::openUrlInWebView
-            )
+            if(URLUtil.isValidUrl(qrCodeUrl)) {
+                showAlert(
+                    title = getString(R.string.url_alert_title),
+                    message = getString(R.string.url_alert_message),
+                    positiveAction = getString(R.string.url_alert_positive_choice) to ::openUrlInBrowser,
+                    negativeAction = getString(R.string.url_alert_negative_choice) to ::openUrlInWebView
+                )
+            } else {
+                showToast(getString(R.string.invalid_url))
+            }
         } else if (it?.second != null) {
             val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
             parentFragmentManager.setFragmentResult(
