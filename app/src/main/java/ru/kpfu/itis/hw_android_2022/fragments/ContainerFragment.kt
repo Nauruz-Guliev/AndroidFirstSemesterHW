@@ -54,7 +54,6 @@ class ContainerFragment : Fragment() {
                 val jobs = mutableListOf<Job>()
                 val chunkedUrlsList = catsArray?.chunked(catsArray?.size?.div(chunkSize) ?: 1)
                 chunkedUrlsList?.forEach { chunkedList ->
-                    delay(4000L)
                     jobs.add(async { loadImages(chunkedList) })
                 }
                 //но при этом ждём, пока все группы закончат и выводим сообщение
