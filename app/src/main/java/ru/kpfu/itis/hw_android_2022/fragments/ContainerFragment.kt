@@ -1,7 +1,6 @@
 package ru.kpfu.itis.hw_android_2022.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +47,7 @@ class ContainerFragment : Fragment() {
     }
 
     // возможно, я неправильно понял
-    // 3 списка, все 3 выполняются асинхронно и внутри 3 списков ссылки тоже загружаются асинхронно
+    // 3 списка, они выполняются последовательно и внутри ссылки загружаются асинхронно
     private fun loadImages(chunkSize: Int, onSuccess: () -> Unit, onError: () -> Unit) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
@@ -56,6 +55,7 @@ class ContainerFragment : Fragment() {
                 val chunkedUrlsList = catsArray?.chunked(catsArray?.size?.div(chunkSize) ?: 1)
                 //группами ставим асинхронно на закачку
                 chunkedUrlsList?.forEach { chunkedList ->
+                    delay(4000L)
                     jobs.add(async { loadImages(chunkedList) })
                 }
                 //но при этом ждём, пока все группы закончат и выводим сообщение
@@ -73,9 +73,7 @@ class ContainerFragment : Fragment() {
 
     private fun loadImages(images: List<String>) {
         images.forEach { imageUrl ->
-            lifecycleScope.launch(Dispatchers.IO) {
-                Glide.with(this@ContainerFragment).preloadImage(imageUrl)
-            }
+            Glide.with(this@ContainerFragment).preloadImage(imageUrl)
         }
     }
 
