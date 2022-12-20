@@ -53,7 +53,6 @@ class ContainerFragment : Fragment() {
             try {
                 val jobs = mutableListOf<Job>()
                 val chunkedUrlsList = catsArray?.chunked(catsArray?.size?.div(chunkSize) ?: 1)
-                //группами ставим асинхронно на закачку
                 chunkedUrlsList?.forEach { chunkedList ->
                     delay(4000L)
                     jobs.add(async { loadImages(chunkedList) })
