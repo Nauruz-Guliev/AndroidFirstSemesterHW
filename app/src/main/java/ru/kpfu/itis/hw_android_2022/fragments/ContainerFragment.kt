@@ -46,8 +46,8 @@ class ContainerFragment : Fragment() {
         }
     }
 
-    // возможно, я неправильно понял
-    // 3 списка, они выполняются последовательно и внутри ссылки загружаются асинхронно
+
+    // 3 списка, они выполняются ассинхронно и внутри ссылки загружаются тоже асинхронно
     private fun loadImages(chunkSize: Int, onSuccess: () -> Unit, onError: () -> Unit) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
@@ -71,7 +71,9 @@ class ContainerFragment : Fragment() {
 
     private fun loadImages(images: List<String>) {
         images.forEach { imageUrl ->
-            Glide.with(this@ContainerFragment).preloadImage(imageUrl)
+            lifecycleScope.launch {
+                Glide.with(this@ContainerFragment).preloadImage(imageUrl)
+            }
         }
     }
 
