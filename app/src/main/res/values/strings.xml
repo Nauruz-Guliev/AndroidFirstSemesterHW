@@ -27,6 +27,12 @@
     <string name="register_success">Registered successfully</string>
     <string name="register_error">Such a user already exists</string>
 
+    <string name="update_success">Updated successfully </string>
+    <string name="update_error">Such a user already exists</string>
+
+    <string name="user_not_found">User not found</string>
+
+
 
 
 

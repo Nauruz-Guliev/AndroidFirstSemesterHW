@@ -53,12 +53,13 @@ class ProfileFragment: Fragment() {
                             DatabaseHandler.updateUser(username = newUserName, userId)
                             //также надо обновить sp
                             preferencesHandler?.saveUsername(newUserName)
-                            context?.showToast("Updated successfully")
+                            context?.showToast(getString(R.string.update_success))
                         } else {
-                            context?.showToast("Couldn't find such a user")
+                            // а вдруг?
+                            context?.showToast(getString(R.string.user_not_found))
                         }
                     } catch (ex : SQLiteConstraintException) {
-                        context?.showToast("Such a user exists already")
+                        context?.showToast(getString(R.string.update_success))
                     }
                 }
             }
