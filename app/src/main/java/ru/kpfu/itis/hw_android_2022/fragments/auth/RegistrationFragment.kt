@@ -48,7 +48,7 @@ class RegistrationFragment : Fragment() {
                 val userName = inputLayoutLogin.editText?.text.toString()
                 if (validateInput(userName, password, passwordConfirm)) {
                     lifecycleScope.launch(Dispatchers.Main) {
-                        if (DatabaseHandler.findUser(userName, password) == null) {
+                        if (DatabaseHandler.findUser(userName, password.toMd5()) == null) {
                             DatabaseHandler.createUser(
                                 UserModel(
                                     id = 0,
