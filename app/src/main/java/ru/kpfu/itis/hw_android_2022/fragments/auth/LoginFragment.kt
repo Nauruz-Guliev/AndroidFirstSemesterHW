@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import ru.kpfu.itis.hw_android_2022.R
 import ru.kpfu.itis.hw_android_2022.databinding.LoginFragmentBinding
 import ru.kpfu.itis.hw_android_2022.db.DatabaseHandler
+import ru.kpfu.itis.hw_android_2022.utils.PreferencesHandler
 import ru.kpfu.itis.hw_android_2022.utils.showToast
 import ru.kpfu.itis.hw_android_2022.utils.toMd5
 import ru.kpfu.itis.hw_android_2022.utils.validateInput
@@ -20,6 +21,7 @@ import ru.kpfu.itis.hw_android_2022.utils.validateInput
 class LoginFragment : Fragment() {
     private var _binding: LoginFragmentBinding? = null
     private val binding by lazy { _binding!! }
+    private var preferencesHandler: PreferencesHandler? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +29,7 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = LoginFragmentBinding.inflate(layoutInflater)
+        preferencesHandler = PreferencesHandler(binding.root.context)
         return binding.root
     }
 
@@ -47,13 +50,18 @@ class LoginFragment : Fragment() {
                 if (validateInput(userName, password)) {
                     lifecycleScope.launch(Dispatchers.Main) {
                         if (DatabaseHandler.findUser(userName, password.toMd5()) != null) {
-                            showToast("Logged in")
+                            context?.showToast("Logged in")
+                            //сохраняем в SP
+                            preferencesHandler?.saveUsername(userName)
+                            findNavController().navigate(
+                                R.id.action_loginFragment_to_profileFragment
+                            )
                         } else {
-                            showToast("Wrong username or password. Try again")
+                            context?.showToast("Wrong username or password. Try again")
                         }
                     }
                 } else {
-                    showToast("All fields must be filled in")
+                    context?.showToast("All fields must be filled in")
                 }
             }
         }
@@ -62,6 +70,7 @@ class LoginFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        preferencesHandler = null
     }
 
     companion object {

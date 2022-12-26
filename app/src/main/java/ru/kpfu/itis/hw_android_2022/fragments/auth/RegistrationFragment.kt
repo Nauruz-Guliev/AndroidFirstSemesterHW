@@ -49,7 +49,6 @@ class RegistrationFragment : Fragment() {
                 if (validateInput(userName, password, passwordConfirm)) {
                     lifecycleScope.launch(Dispatchers.Main) {
                         if (DatabaseHandler.findUser(userName, password) == null) {
-                            DatabaseHandler.deleteAllUsers()
                             DatabaseHandler.createUser(
                                 UserModel(
                                     id = 0,
@@ -57,18 +56,17 @@ class RegistrationFragment : Fragment() {
                                     userPassword = password.toMd5()
                                 )
                             )
-                            showToast("Registered successfully")
+                            context?.showToast("Registered successfully")
                             findNavController().navigate(
                                 R.id.action_registrationFragment_to_loginFragment
                             )
                         } else {
-                            showToast("User with such a user name already exists")
-                            showToast( DatabaseHandler.findUser(userName, password))
+                            context?.showToast( DatabaseHandler.findUser(userName, password))
                             Log.d("DB_RESULT", DatabaseHandler.getUsers().toString())
                         }
                     }
                 } else {
-                    showToast("Need to fill in all the fields")
+                    context?.showToast("Need to fill in all the fields")
                 }
             }
         }

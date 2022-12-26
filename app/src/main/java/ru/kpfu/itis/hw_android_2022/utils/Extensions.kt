@@ -1,12 +1,15 @@
 package ru.kpfu.itis.hw_android_2022.utils
 
+import android.content.Context
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import java.math.BigInteger
 import java.security.MessageDigest
 
 
-fun<T> Fragment.showToast(message: T) = Toast.makeText(this.context, message.toString(), Toast.LENGTH_SHORT).show()
+fun<T> Context.showToast(message: T) = Toast.makeText(this, message.toString(), Toast.LENGTH_SHORT).show()
 
 fun String.toMd5() : String {
     val crypt = MessageDigest.getInstance("MD5");
@@ -29,4 +32,19 @@ fun Fragment.validateInput(
         }
     }
     return true
+}
+
+fun View.showSnackbar(
+    msg: String,
+    actionMessage: CharSequence?,
+    action: () -> Unit
+) {
+    val snackbar = Snackbar.make(this, msg, Snackbar.LENGTH_SHORT)
+    if (actionMessage != null) {
+        snackbar.setAction(actionMessage) {
+            action()
+        }.show()
+    } else {
+        snackbar.show()
+    }
 }

@@ -16,7 +16,8 @@ object DatabaseHandler {
             val db = Room.databaseBuilder(
                 applicationContext,
                 UserDatabase::class.java, "USER_DATABASE"
-            ).build()
+            ).addMigrations(Migrations.MIGRATION_1_2)
+                .build()
             userDb = db.userDao()
         }
     }
@@ -41,9 +42,17 @@ object DatabaseHandler {
         return@withContext userDb?.findUser(username, password)
     }
 
-    suspend fun deleteAllUsers() {
+    suspend fun updateUser(username: String, id: Int) = withContext(Dispatchers.IO) {
+        userDb?.updateUser(username, id)
+    }
+
+    suspend fun findUserId(username: String) = withContext(Dispatchers.IO) {
+        return@withContext userDb?.findUserId(username)
+    }
+
+    suspend fun deleteAllUsers() =
         withContext(Dispatchers.IO) {
             userDb?.deleteAllUsers()
         }
-    }
+
 }

@@ -12,4 +12,13 @@
     <string name="edit_login">Edit login</string>
     <string name="i_have_an_account">I have an account</string>
     <string name="register_new_account">Register new account</string>
+
+    <string name="logout_message">Are you sure you want to log out?</string>
+    <string name="ok">OK</string>
+
+    <string name="check_box_first">check_box_first</string>
+    <string name="check_box_second">check_box_second</string>
+    <string name="check_box_third">check_box_third</string>
+
+
 </resources>

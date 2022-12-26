@@ -7,7 +7,6 @@ class PermissionsHandler(
     activity: AppCompatActivity,
     onPermissionGranted: () -> Unit
 ) {
-
     private val singlePermissionContract =
         activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if (it) {

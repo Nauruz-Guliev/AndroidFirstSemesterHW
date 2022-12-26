@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/check_box_first"
+        android:title="Checkbox first"
+        />
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/check_box_second"
+        android:title="Checkbox second"
+        />
+
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/check_box_third"
+        android:title="Checkbox third"
+        />
+</PreferenceScreen>
