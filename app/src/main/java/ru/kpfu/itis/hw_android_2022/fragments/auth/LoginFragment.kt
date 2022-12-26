@@ -50,18 +50,18 @@ class LoginFragment : Fragment() {
                 if (validateInput(userName, password)) {
                     lifecycleScope.launch(Dispatchers.Main) {
                         if (DatabaseHandler.findUser(userName, password.toMd5()) != null) {
-                            context?.showToast("Logged in")
+                            context?.showToast(getString(R.string.login_success))
                             //сохраняем в SP
                             preferencesHandler?.saveUsername(userName)
                             findNavController().navigate(
                                 R.id.action_loginFragment_to_profileFragment
                             )
                         } else {
-                            context?.showToast("Wrong username or password. Try again")
+                            context?.showToast(getString(R.string.login_error))
                         }
                     }
                 } else {
-                    context?.showToast("All fields must be filled in")
+                    context?.showToast(getString(R.string.empty_fields_error))
                 }
             }
         }

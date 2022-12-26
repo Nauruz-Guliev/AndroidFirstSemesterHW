@@ -20,5 +20,16 @@
     <string name="check_box_second">check_box_second</string>
     <string name="check_box_third">check_box_third</string>
 
+    <string name="login_success">Logged in</string>
+    <string name="login_error">Wrong password or username. Try again</string>
+
+    <string name="empty_fields_error">All fields must be filled in</string>
+    <string name="register_success">Registered successfully</string>
+    <string name="register_error">Such a user already exists</string>
+
+
+
+
+
 
 </resources>

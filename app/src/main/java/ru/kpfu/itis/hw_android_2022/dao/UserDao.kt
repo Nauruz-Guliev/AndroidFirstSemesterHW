@@ -9,7 +9,6 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createUser(user: UserEntity)
 
-    @Transaction
     @Query("SELECT * FROM users")
     suspend fun getAllUsers(): List<UserEntity>
 
@@ -19,7 +18,6 @@ interface UserDao {
     @Query("DELETE FROM users")
     suspend fun deleteAllUsers()
 
-    @Transaction
     @Query("SELECT * from users where username = :username and password = :password")
     suspend fun findUser(username: String, password: String): UserEntity?
 

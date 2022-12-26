@@ -3,6 +3,7 @@ package ru.kpfu.itis.hw_android_2022.utils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
+
 class PermissionsHandler(
     activity: AppCompatActivity,
     onPermissionGranted: () -> Unit

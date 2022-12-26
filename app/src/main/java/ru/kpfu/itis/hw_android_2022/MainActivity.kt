@@ -13,11 +13,17 @@ import ru.kpfu.itis.hw_android_2022.utils.PreferencesHandler
 
 class MainActivity : AppCompatActivity() {
 
-    // так уж и быть, но в активити это не требуется
+    // можно и без lateinit или, возможно, с делегатами?
+    // всегда ориентировался на эти ссылки
+    // https://developer.android.com/topic/libraries/view-binding
+    // https://medium.com/mobile-app-development-publication/not-all-viewbinding-need-null-setting-e16fe6737489
+
     private var _binding: ActivityMainBinding? = null
     private val binding by lazy { _binding!! }
 
-    // так и не понял, когда разрешения могут понадобиться
+    // несмотря на то, что read/write external storage является runtime permission
+    // разрешения не требуются для работы room. Я не понял почему и ответа не нашёл
+
     private var requestPermission = PermissionsHandler(this) {
 
     }
@@ -42,10 +48,13 @@ class MainActivity : AppCompatActivity() {
         val bottomView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomView.setupWithNavController(controller)
 
-        with(binding as ActivityMainBinding) {
+        with(binding) {
             bottomNavigationView.setupWithNavController(controller)
         }
         controller.addOnDestinationChangedListener { _, destination, _ ->
+
+            //достаточно проверять только основной фрагмент,
+            // потому что мы по логике вещей внезапно в настройки не можем перейти
             if (destination.id == R.id.profileFragment) {
                 if (checkIfUserIsLoggedIn()) {
                     binding.bottomNavigationView.visibility = ViewGroup.VISIBLE
@@ -59,17 +68,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToMain() {
 
-    }
 
     private fun checkIfUserIsLoggedIn(): Boolean =
         preferencesHandler?.getUsername() != "" && preferencesHandler?.getUsername() != null
 
 
-    private fun loginUser() {
-
-    }
     /*
     private fun navigateToAuth() {
         _binding = ActivityAuthBinding.inflate(layoutInflater)

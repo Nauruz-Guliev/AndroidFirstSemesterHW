@@ -56,17 +56,18 @@ class RegistrationFragment : Fragment() {
                                     userPassword = password.toMd5()
                                 )
                             )
-                            context?.showToast("Registered successfully")
+                            context?.showToast(getString(R.string.register_success))
+                            // можно было и сразу в профиль на самом деле..
                             findNavController().navigate(
                                 R.id.action_registrationFragment_to_loginFragment
                             )
                         } else {
-                            context?.showToast( DatabaseHandler.findUser(userName, password))
+                            context?.showToast(getString(R.string.register_error))
                             Log.d("DB_RESULT", DatabaseHandler.getUsers().toString())
                         }
                     }
                 } else {
-                    context?.showToast("Need to fill in all the fields")
+                    context?.showToast(getString(R.string.empty_fields_error))
                 }
             }
         }
