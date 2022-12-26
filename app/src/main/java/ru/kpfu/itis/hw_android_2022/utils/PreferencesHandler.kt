@@ -20,6 +20,9 @@ class PreferencesHandler(private val ctx: Context) {
             this.putString(USERNAME_KEY, username)
                 .apply()
         }
+        defaultSp?.edit().apply {
+            this?.putString(USERNAME_KEY, username)
+        }?.apply()
         loadUserSettings(username)
     }
 
@@ -51,9 +54,9 @@ class PreferencesHandler(private val ctx: Context) {
         val checkBoxFirst =
             defaultSp?.getBoolean(ctx.getString(R.string.check_box_first), true)?: true
         val checkBoxSecond =
-            defaultSp?.getBoolean(ctx.getString(R.string.check_box_first), true)?: true
+            defaultSp?.getBoolean(ctx.getString(R.string.check_box_second), true)?: true
         val checkBoxThird =
-            defaultSp?.getBoolean(ctx.getString(R.string.check_box_first), true)?: true
+            defaultSp?.getBoolean(ctx.getString(R.string.check_box_third), true)?: true
 
         userPreferences.edit().apply {
             putBoolean(ctx.getString(R.string.check_box_first), checkBoxFirst)
@@ -69,9 +72,9 @@ class PreferencesHandler(private val ctx: Context) {
         val checkBoxFirst =
             userPreferences.getBoolean(ctx.getString(R.string.check_box_first), true)
         val checkBoxSecond =
-            userPreferences.getBoolean(ctx.getString(R.string.check_box_first), true)
+            userPreferences.getBoolean(ctx.getString(R.string.check_box_second), true)
         val checkBoxThird =
-            userPreferences.getBoolean(ctx.getString(R.string.check_box_first), true)
+            userPreferences.getBoolean(ctx.getString(R.string.check_box_third), true)
 
         defaultSp?.edit()?.apply {
             putBoolean(ctx.getString(R.string.check_box_first), checkBoxFirst)
