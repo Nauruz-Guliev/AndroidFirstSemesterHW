@@ -1,5 +1,6 @@
 package ru.kpfu.itis.hw_android_2022.fragments.main
 
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,16 +45,20 @@ class ProfileFragment: Fragment() {
             }
             btnEdit.setOnClickListener {
                 lifecycleScope.launch(Dispatchers.Main) {
-                    val userId = preferencesHandler?.getUsername()
-                        ?.let { it1 -> DatabaseHandler.findUserId(it1) }
-                    if (userId != null) {
-                        val newUserName = inputLayoutLogin.editText?.text.toString()
-                        DatabaseHandler.updateUser(username = newUserName, userId)
-                        //также надо обновить sp
-                        preferencesHandler?.saveUsername(newUserName)
-                        context?.showToast("Updated successfully")
-                    } else {
-                        context?.showToast("Couldn't find such a user")
+                    try {
+                        val userId = preferencesHandler?.getUsername()
+                            ?.let { it1 -> DatabaseHandler.findUserId(it1) }
+                        if (userId != null) {
+                            val newUserName = inputLayoutLogin.editText?.text.toString()
+                            DatabaseHandler.updateUser(username = newUserName, userId)
+                            //также надо обновить sp
+                            preferencesHandler?.saveUsername(newUserName)
+                            context?.showToast("Updated successfully")
+                        } else {
+                            context?.showToast("Couldn't find such a user")
+                        }
+                    } catch (ex : SQLiteConstraintException) {
+                        context?.showToast("Such a user exists already")
                     }
                 }
             }
