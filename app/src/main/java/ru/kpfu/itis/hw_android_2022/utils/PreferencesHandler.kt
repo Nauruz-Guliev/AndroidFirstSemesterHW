@@ -47,7 +47,7 @@ class PreferencesHandler(private val ctx: Context) {
 
     // всё это не самый оптимальный подход и не масштабируемый
     // но мне было лень возиться с таблицами и с внешними ключами
-    // так же для каждого пользователя свой sp
+    // так для каждого пользователя свой sp
     private fun saveUserSettings(username: String) {
         val userPreferences = ctx.getSharedPreferences(username, Context.MODE_PRIVATE)
 
