@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">hw_android_2022</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="album_image_url1">https://www.udiscovermusic.com/wp-content/uploads/2017/08/Pink-Floyd-Dark-Side-Of-The-Moon.jpg</string>
+    <string name="album_image_url2">https://www.graphicdesignforum.com/uploads/default/original/2X/d/d3c4e744046205a49d06beb874df3b39da7c9c73.jpeg</string>
+    <string name="album_image_url3">https://d1csarkz8obe9u.cloudfront.net/themedlandingpages/tlp_hero_album-covers-d12ef0296af80b58363dc0deef077ecc-1552649680.jpg</string>
+    <string name="album_image_url4">https://www.udiscovermusic.com/wp-content/uploads/2015/10/Uriah-Heep-The-Magician%E2%80%99s-Birthday-.jpg</string>
+    <string name="album_image_url5">https://upload.wikimedia.org/wikipedia/commons/3/33/Are_You_Experienced_-_US_cover-edit.jpg</string>
+    <string name="album_image_url6">https://static-cse.canva.com/blob/930601/1600w-X0QsmXzdDzs.jpg</string>
+    <string name="album_image_url7">https://www.graphicdesignforum.com/uploads/default/original/2X/d/d3c4e744046205a49d06beb874df3b39da7c9c73.jpeg</string>
+    <string name="my_playlist">My playlist %1$s </string>
+    <string name="my_favorites">My favorites %1$s </string>
+    <string name="all_time_best">All time best %1$s </string>
+    <string name="tracks"> %1$s tracks </string>
+    <string name="rock">Rock </string>
+    <string name="metal">Metal </string>
+    <string name="country">Country </string>
+    <string name="EDM">EDM </string>
+    <string name="recently_listened">You recently listened to: </string>
+    <string name="floating_button">floating button</string>
+    <string name="duration">\u2014 \u0020 %1$s hours</string>
+    <string name="icon">Icon</string>
+    <string name="delete">Delete</string>
+
+    <string-array name="random_image_urls">
+        <item>https://media.architecturaldigest.com/photos/5890e88033bd1de9129eab0a/3:4/w_650,h_867,c_limit/Artist-Designed%20Album%20Covers%202.jpg</item>
+        <item>https://assets.capitalxtra.com/2013/48/best-hip-hop-album-covers-9-1386002950-view-0.jpg</item>
+        <item>https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Are_You_Experienced_-_US_cover-edit.jpg/330px-Are_You_Experienced_-_US_cover-edit.jpg</item>
+        <item>https://www.skillshare.com/blog/wp-content/uploads/2016/06/ScreenShot2020-10-20at11.36.46AM.png</item>
+    </string-array>
+</resources>
