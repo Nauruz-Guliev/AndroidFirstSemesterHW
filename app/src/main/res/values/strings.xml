@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">hw_android_2022</string>
+    <string name="notify_in_sec">Notify in(sec):</string>
+    <string name="header_text">Header text</string>
+    <string name="notification_body">Notification body</string>
+    <string name="notification_body_detailed">Notification body detailed</string>
+    <string name="enable_detailed_body">Enable detailed body</string>
+    <string name="show_alarm">Show alarm</string>
+    <string name="show_device_reboot_time">Show device reboot time</string>
+    <string name="disable_alarm">Disable alarm</string>
+
+    <string name="channel_name">Notification channel</string>
+    <string name="channel_description">My notification channel description</string>
+
+    <string name="success_message">Notification with time remaining: %1s was cancelled successfully.</string>
+
+    <string name="failure_message">Couldn\'t cancel the notification.  </string>
+
+    <string name="milliseconds_to_minutes_and_seconds">%02d min, %02d sec</string>
+</resources>
