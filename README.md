@@ -6,3 +6,4 @@
 * SharedPreferences
 * Permissions
 * Kotlin Extensions
+* Activity Result API
